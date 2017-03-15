@@ -27,7 +27,7 @@ CThostFtdcMdSpiI::~CThostFtdcMdSpiI()
     uv_close((uv_handle_t*)&async_t,NULL);
 }
 
-void CThostFtdcMdSpiI::_on_completed(uv_work_t * work, int)
+void CThostFtdcMdSpiI::_on_completed(uv_work_t * work, int status)
 {
     //调用js中的回调函数 在初始化的时候注册的
     taskdata* task = (taskdata*)work->data;

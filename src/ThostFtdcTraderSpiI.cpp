@@ -144,10 +144,7 @@ void CThostFtdcTraderSpiI::_on_completed(uv_work_t * work, int)
         if(task->api == "OnRtnOpenAccountByBank") { task->ptd->MainOnRtnOpenAccountByBank(&task->data.OpenAccount); continue; };
         if(task->api == "OnRtnCancelAccountByBank") { task->ptd->MainOnRtnCancelAccountByBank(&task->data.CancelAccount); continue; };
         if(task->api == "OnRtnChangeAccountByBank") { task->ptd->MainOnRtnChangeAccountByBank(&task->data.ChangeAccount); continue; };
-    }while(0);
-    
-    work = NULL;
-
+    }while(0); 
     delete task; 
 }
 

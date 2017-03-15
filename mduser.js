@@ -1,5 +1,3 @@
-process.env.UV_THREADPOOL_SIZE = 5; // This will work
-
 var ctp = require('bindings')('shifctp');
 var mduser = ctp.crmd();
 var login = Object()
