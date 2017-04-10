@@ -26,11 +26,15 @@ CThostFtdcTraderSpiI::~CThostFtdcTraderSpiI()
     uv_close((uv_handle_t*)&async_t,NULL);
 }
 
-void CThostFtdcTraderSpiI::_on_completed(uv_work_t * work, int)
+void CThostFtdcTraderSpiI::on_uv_close_cb(uv_handle_t* handle) 
+{
+    delete (taskdata*)(((uv_async_t*)handle)->data);
+}
+
+void CThostFtdcTraderSpiI::on_async_cb(uv_async_t* handle)
 {
     //调用js中的回调函数 在初始化的时候注册的
-    taskdata* task = (taskdata*)work->data;
-    //printf("task->api :%s\n", task->api.c_str());
+    taskdata* task = (taskdata*)handle->data;
     do{
         if(task->api == "OnFrontConnected") { task->ptd->MainOnFrontConnected(); continue; };
         if(task->api == "OnFrontDisconnected") { task->ptd->MainOnFrontDisconnected(task->data.nReason); continue; };
@@ -145,12 +149,7 @@ void CThostFtdcTraderSpiI::_on_completed(uv_work_t * work, int)
         if(task->api == "OnRtnCancelAccountByBank") { task->ptd->MainOnRtnCancelAccountByBank(&task->data.CancelAccount); continue; };
         if(task->api == "OnRtnChangeAccountByBank") { task->ptd->MainOnRtnChangeAccountByBank(&task->data.ChangeAccount); continue; };
     }while(0); 
-    delete task; 
-}
-
-void CThostFtdcTraderSpiI::_on_async_queue(uv_work_t * work)
-{
-    uv_async_send(&((taskdata*)work->data)->ptd->async_t);
+    uv_close((uv_handle_t*)handle, on_uv_close_cb);
 }
 
 void CThostFtdcTraderSpiI::OnFrontConnected()

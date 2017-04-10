@@ -14,7 +14,7 @@ namespace md
 
 CThostFtdcMdSpiI::CThostFtdcMdSpiI()
 {
-    uv_async_init(uv_default_loop(),&async_t,NULL);
+    uv_async_init(uv_default_loop(), &async_t, NULL);
     m_pApi = CThostFtdcMdApi::CreateFtdcMdApi();
     m_pApi->RegisterSpi(this);         
 }
@@ -24,13 +24,17 @@ CThostFtdcMdSpiI::~CThostFtdcMdSpiI()
     m_pApi->RegisterSpi(NULL);
     m_pApi->Release();
     m_pApi = NULL;
-    uv_close((uv_handle_t*)&async_t,NULL);
+    uv_close((uv_handle_t*)&async_t, NULL);
 }
 
-void CThostFtdcMdSpiI::_on_completed(uv_work_t * work, int status)
+void CThostFtdcMdSpiI::on_uv_close_cb(uv_handle_t* handle) 
 {
-    //调用js中的回调函数 在初始化的时候注册的
-    taskdata* task = (taskdata*)work->data;
+    delete (taskdata*)(((uv_async_t*)handle)->data);
+}
+
+void CThostFtdcMdSpiI::on_async_cb(uv_async_t* handle)
+{
+    taskdata* task = (taskdata*)handle->data;
     do{
     if(task->api == "OnRtnDepthMarketData") { task->pmd->MainOnRtnDepthMarketData(&task->data.DepthMarketData); continue;}
     else if(task->api == "OnRtnForQuoteRsp") { task->pmd->MainOnRtnForQuoteRsp(&task->data.ForQuoteRsp); continue;}
@@ -46,20 +50,17 @@ void CThostFtdcMdSpiI::_on_completed(uv_work_t * work, int status)
     else if(task->api == "OnRspUnSubForQuoteRsp") { task->pmd->MainOnRspUnSubForQuoteRsp(&task->data.SpecificInstrument, &task->RspInfo, task->nRequestID, task->bIsLast); continue;}
     else {printf("ERROR:%s _on_completed\n", task->api.c_str());}
     }while(0);
-    delete task; 
+    uv_close((uv_handle_t*)handle, on_uv_close_cb);
 }
 
-void CThostFtdcMdSpiI::_on_async_queue(uv_work_t * work)
-{
-    uv_async_send(&((taskdata*)work->data)->pmd->async_t);
-}
 
 /////////////////////////////on回调函数///////////////////////////////////////////////////////////
 void CThostFtdcMdSpiI::OnFrontConnected()
 {
     taskdata* t = new taskdata(this);
     t->api = "OnFrontConnected";
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnFrontDisconnected(int nReason)
@@ -67,7 +68,8 @@ void CThostFtdcMdSpiI::OnFrontDisconnected(int nReason)
     taskdata* t = new taskdata(this);
     t->api = "OnFrontDisconnected";
     t->data.nReason = nReason;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnHeartBeatWarning(int nTimeLapse)
@@ -75,7 +77,8 @@ void CThostFtdcMdSpiI::OnHeartBeatWarning(int nTimeLapse)
     taskdata* t = new taskdata(this);
     t->api = "OnHeartBeatWarning";
     t->data.nTimeLapse = nTimeLapse;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -86,7 +89,8 @@ void CThostFtdcMdSpiI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -97,7 +101,8 @@ void CThostFtdcMdSpiI::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, C
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -107,7 +112,8 @@ void CThostFtdcMdSpiI::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequest
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -118,7 +124,8 @@ void CThostFtdcMdSpiI::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSp
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -129,7 +136,8 @@ void CThostFtdcMdSpiI::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *p
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -140,7 +148,8 @@ void CThostFtdcMdSpiI::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pS
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
@@ -151,7 +160,8 @@ void CThostFtdcMdSpiI::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }   
 
 void CThostFtdcMdSpiI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) 
@@ -159,7 +169,8 @@ void CThostFtdcMdSpiI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     taskdata* t = new taskdata(this);
     t->api = "OnRtnDepthMarketData";
     t->data.DepthMarketData = *pDepthMarketData;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 void CThostFtdcMdSpiI::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) 
@@ -167,7 +178,8 @@ void CThostFtdcMdSpiI::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp
     taskdata* t = new taskdata(this);
     t->api = "OnRtnForQuoteRsp";
     t->data.ForQuoteRsp = *pForQuoteRsp;
-    uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+    uv_async_send(&t->handle);
 }
 
 }

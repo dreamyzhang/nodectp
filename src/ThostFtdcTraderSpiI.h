@@ -36,10 +36,10 @@ class CThostFtdcTraderSpiI;
 //以api来划分结构体
 struct taskdata
 {
-    taskdata(CThostFtdcTraderSpiI* p){work.data = this; ptd = p;}
+    taskdata(CThostFtdcTraderSpiI* p){handle.data = this; ptd = p;}
     CThostFtdcTraderSpiI* ptd;
     string api;             //表示是那个api回调
-    uv_work_t work;
+    uv_async_t handle;
     union _data 
     {
        int nReason;
@@ -140,6 +140,12 @@ class CThostFtdcTraderSpiI : public CThostFtdcTraderSpi
 		virtual ~CThostFtdcTraderSpiI();
 		CThostFtdcTraderApi* GetTdApi(){ return m_pApi;}
         
+        void uv_async_send(uv_async_t* handle)
+        {
+            uv_async_init(uv_default_loop(), handle, on_async_cb);
+            uv_async_send(handle);
+        }
+
         inline void  QUEUEPUSH(const char* api, void* p=NULL, int len=0, CThostFtdcRspInfoField* pRspInfo=NULL, int nRequestID=0, int bIsLast=0)
         {
             taskdata* t = new taskdata(this);
@@ -156,8 +162,8 @@ class CThostFtdcTraderSpiI : public CThostFtdcTraderSpi
             if(pRspInfo != NULL)t->RspInfo = *pRspInfo;    
             t->nRequestID = nRequestID;
             t->bIsLast = bIsLast;     
-            uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
-
+            //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
+            uv_async_send(&t->handle);
         }
 
 	    virtual void MainOnFrontConnected() = 0;
@@ -611,12 +617,12 @@ class CThostFtdcTraderSpiI : public CThostFtdcTraderSpi
 		virtual void OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccount);
 		
     private:
+ 
+        static void on_uv_close_cb(uv_handle_t* handle); 
+        static void on_async_cb(uv_async_t* handle);
+
         CThostFtdcTraderApi*    		m_pApi;        //交易请求结构体
         uv_async_t async_t;
-		//CThostFtdcReqUserLoginField 	userLoginField; //登录结构体
-		//CThostFtdcReqAuthenticateField reqAuthenticate;//验证
-        static void _on_completed(uv_work_t * work, int);
-        static void _on_async_queue(uv_work_t * work);
 };
 
 }

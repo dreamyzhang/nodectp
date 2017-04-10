@@ -38,10 +38,10 @@ class CThostFtdcMdSpiI;
 //以api来划分结构体
 struct taskdata
 {
-    taskdata(CThostFtdcMdSpiI* p){work.data = this; pmd = p;}
+    taskdata(CThostFtdcMdSpiI* p){handle.data = this; pmd = p;}
     CThostFtdcMdSpiI* pmd;
     string api;             //表示是那个api回调
-    uv_work_t work;
+    uv_async_t handle;
 
     union _data 
     {
@@ -64,6 +64,12 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
     public:
         CThostFtdcMdSpiI();
         ~CThostFtdcMdSpiI();
+
+        void uv_async_send(uv_async_t* handle)
+        {
+            uv_async_init(uv_default_loop(), handle, on_async_cb);
+            uv_async_send(handle);
+        }
 
         //主线程回调js处理
         virtual void MainOnFrontConnected() = 0;
@@ -96,8 +102,8 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
         CThostFtdcMdApi* GetMdApi(){return m_pApi;}
 
     private:
-        static void _on_completed(uv_work_t * work, int);
-        static void _on_async_queue(uv_work_t * work);
+        static void on_uv_close_cb(uv_handle_t* handle); 
+        static void on_async_cb(uv_async_t* handle);
 
         CThostFtdcMdApi* 	m_pApi; 		        //交易请求结构体
         uv_async_t async_t;
