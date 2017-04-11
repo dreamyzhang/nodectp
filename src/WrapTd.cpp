@@ -814,7 +814,6 @@ if(it == callback_map.end()) return;
 
 void WrapTd::MainOnFrontConnected()
 {
-
     CONTEXT() 
     Local<Function> cb = Local<Function>::New(isolate, it->second);
     cb->Call(Null(isolate), 0, NULL);

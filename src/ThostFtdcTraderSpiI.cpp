@@ -14,16 +14,29 @@ namespace td
 
 CThostFtdcTraderSpiI::CThostFtdcTraderSpiI()
 {
-    uv_async_init(uv_default_loop(),&async_t,NULL);
+    task_size = 1000;
+    task_position = 0;
+    ptask = new taskdata* [task_size];
+    for(uint32_t i=0; i<task_size; i++)
+    {
+        ptask[i] = new taskdata(this);
+        uv_async_init(uv_default_loop(), &ptask[i]->handle, on_async_cb);
+    }
+    
     m_pApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
     m_pApi->RegisterSpi(this);
 }
 
 CThostFtdcTraderSpiI::~CThostFtdcTraderSpiI()
 {
+    for(uint32_t i=0; i<task_size; i++)
+    {
+        uv_close((uv_handle_t*) & ptask[i]->handle, on_uv_close_cb);
+    }
+    delete ptask;
+    
     m_pApi->Release(); 
     m_pApi = NULL;
-    uv_close((uv_handle_t*)&async_t,NULL);
 }
 
 void CThostFtdcTraderSpiI::on_uv_close_cb(uv_handle_t* handle) 
@@ -35,6 +48,7 @@ void CThostFtdcTraderSpiI::on_async_cb(uv_async_t* handle)
 {
     //调用js中的回调函数 在初始化的时候注册的
     taskdata* task = (taskdata*)handle->data;
+    //printf("on_async_cb api=%s\n", task->api.c_str());
     do{
         if(task->api == "OnFrontConnected") { task->ptd->MainOnFrontConnected(); continue; };
         if(task->api == "OnFrontDisconnected") { task->ptd->MainOnFrontDisconnected(task->data.nReason); continue; };
@@ -149,7 +163,8 @@ void CThostFtdcTraderSpiI::on_async_cb(uv_async_t* handle)
         if(task->api == "OnRtnCancelAccountByBank") { task->ptd->MainOnRtnCancelAccountByBank(&task->data.CancelAccount); continue; };
         if(task->api == "OnRtnChangeAccountByBank") { task->ptd->MainOnRtnChangeAccountByBank(&task->data.ChangeAccount); continue; };
     }while(0); 
-    uv_close((uv_handle_t*)handle, on_uv_close_cb);
+    task->reinit();
+    //uv_close((uv_handle_t*)handle, on_uv_close_cb);
 }
 
 void CThostFtdcTraderSpiI::OnFrontConnected()

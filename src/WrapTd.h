@@ -488,9 +488,7 @@ namespace td
                 v8::Isolate* isolate = v8::Isolate::GetCurrent();
                 if (pRspInfo != NULL) 
                 { 
-    
                     //printf("-----%d %s--------\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
-                   
                     v8::Local<v8::Object> jsonInfo = v8::Object::New(isolate);                                       
                     jsonInfo->Set(v8::String::NewFromUtf8(isolate, "ErrorID"), v8::Int32::New(isolate, pRspInfo->ErrorID));   
                     jsonInfo->Set(v8::String::NewFromUtf8(isolate, "ErrorMsg"), v8::String::NewFromUtf8(isolate, CSFunction::GBK2UTF8(pRspInfo->ErrorMsg).c_str()));

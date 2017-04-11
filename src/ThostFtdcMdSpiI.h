@@ -40,8 +40,17 @@ struct taskdata
 {
     taskdata(CThostFtdcMdSpiI* p){handle.data = this; pmd = p;}
     CThostFtdcMdSpiI* pmd;
-    string api;             //表示是那个api回调
     uv_async_t handle;
+    string api;             //表示是那个api回调
+    
+    void reinit()
+    {
+        api = "";
+        memset(&data, 0, sizeof(data));
+        nRequestID = 0;
+        bIsLast = 0;
+        memset(&RspInfo, 0, sizeof(RspInfo));
+    }
 
     union _data 
     {
@@ -65,9 +74,10 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
         CThostFtdcMdSpiI();
         ~CThostFtdcMdSpiI();
 
-        void uv_async_send(uv_async_t* handle)
+        void uv_async_send_s(uv_async_t* handle)
         {
-            uv_async_init(uv_default_loop(), handle, on_async_cb);
+            //printf("uv_async_send api=%s\n", ((taskdata*)handle->data)->api.c_str());
+            //uv_async_init(uv_default_loop(), handle, on_async_cb);
             uv_async_send(handle);
         }
 
@@ -100,13 +110,22 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
         virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) ;
         
         CThostFtdcMdApi* GetMdApi(){return m_pApi;}
-
+       
     private:
         static void on_uv_close_cb(uv_handle_t* handle); 
         static void on_async_cb(uv_async_t* handle);
 
+        taskdata* get_task()
+        {
+            if(task_position >= task_size) task_position = 0;
+            return ptask[task_position++];
+        }
+
+        taskdata** ptask; 
+        uint32_t task_size;
+        uint32_t task_position;
+
         CThostFtdcMdApi* 	m_pApi; 		        //交易请求结构体
-        uv_async_t async_t;
 };
 }
 
