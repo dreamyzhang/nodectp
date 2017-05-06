@@ -53,6 +53,7 @@ void WrapTd::Init(v8::Isolate* isolate)
     // Prototype
     NODE_SET_PROTOTYPE_METHOD(tpl, "GetApiVersion"                   , GetApiVersion                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "Init"                            , Init                               );
+    NODE_SET_PROTOTYPE_METHOD(tpl, "CreateFtdcTraderApi"             , CreateFtdcTraderApi                );
     NODE_SET_PROTOTYPE_METHOD(tpl, "GetTradingDay"                   , GetTradingDay                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "RegisterFront"                   , RegisterFront                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "RegisterNameServer"              , RegisterNameServer                 );
@@ -330,6 +331,24 @@ void WrapTd::Init(const FunctionCallbackInfo<Value>& args)
     WrapTd* obj = node::ObjectWrap::Unwrap<WrapTd>(args.Holder());
     Isolate* isolate = args.GetIsolate();
     obj->GetTdApi()->Init();
+    args.GetReturnValue().Set(Undefined(isolate));
+}
+
+void WrapTd::CreateFtdcTraderApi(const v8::FunctionCallbackInfo<v8::Value>& args)                     
+{
+    WrapTd* obj = node::ObjectWrap::Unwrap<WrapTd>(args.Holder());
+    Isolate* isolate = args.GetIsolate();
+    if (args[0]->IsUndefined())
+    {
+        args[0] = String::NewFromUtf8(isolate, "");
+    }
+    Local<String> flowpath = args[0]->ToString();
+    String::Utf8Value p(flowpath);
+
+    CThostFtdcTraderApi* m_pApi = CThostFtdcTraderApi::CreateFtdcTraderApi((char*)*p);
+
+    obj->setTdApi(m_pApi);
+    obj->RegisterSpi();
     args.GetReturnValue().Set(Undefined(isolate));
 }
 
