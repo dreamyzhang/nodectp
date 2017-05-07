@@ -2,11 +2,11 @@ var ctp = require('bindings')('shifctp');
 var tduser = ctp.crtd();
 var login = Object()
     login.BrokerID = "4040";
-    login.UserID = "369863";
-    login.Password = "369369";
+    login.UserID = "369658";
+    login.Password = "518518";
 var q = Object()
     q.BrokerID =  "4040"
-    q.InvestorID = "369863"
+    q.InvestorID = "369658"
 
 function sleep(milliSeconds){
     var startTime = new Date().getTime(); 
