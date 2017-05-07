@@ -1,18 +1,19 @@
 var ctp = require('bindings')('shifctp');
 var tduser = ctp.crtd();
 var login = Object()
-    login.BrokerID = "9999";
-    login.UserID = "068074";
-    login.Password = "123456";
+    login.BrokerID = "4040";
+    login.UserID = "369863";
+    login.Password = "369369";
 var q = Object()
-    q.BrokerID =  "9999"
-    q.InvestorID = "068074"
+    q.BrokerID =  "4040"
+    q.InvestorID = "369863"
 
 function sleep(milliSeconds){
     var startTime = new Date().getTime(); 
     while (new Date().getTime() < startTime + milliSeconds);
 };
 
+tduser.CreateFtdcTraderApi('./data/td/');
 
 tduser.On("OnFrontConnected", function(){
     console.log("login : ", tduser.ReqUserLogin(login, (new Date()).valueOf()/1000))
@@ -92,7 +93,7 @@ tduser.On("OnErrRtnOrderAction", function(data, Rsp, nRequestID, bIsLast){
 });
 
 console.log("version : ", tduser.GetApiVersion());
-tduser.RegisterFront("tcp://180.168.146.187:10000");
+tduser.RegisterFront("tcp://180.166.103.21:51205");
 //THOST_TERT_RESTART:从本交易日开始重传 0
 //THOST_TERT_RESUME:从上次收到的续传    1
 //THOST_TERT_QUICK:只传送登录后私有流的内容 2
