@@ -3,10 +3,10 @@ var tduser = ctp.crtd();
 var login = Object()
     login.BrokerID = "4040";
     login.UserID = "369658";
-    login.Password = "518518";
+    login.Password = "123456";
 var q = Object()
     q.BrokerID =  "4040"
-    q.InvestorID = "369658"
+    q.InvestorID = "123456"
 
 function sleep(milliSeconds){
     var startTime = new Date().getTime(); 
