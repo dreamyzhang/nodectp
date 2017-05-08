@@ -23,8 +23,8 @@ CThostFtdcTraderSpiI::CThostFtdcTraderSpiI()
         uv_async_init(uv_default_loop(), &ptask[i]->handle, on_async_cb);
     }
     
-    m_pApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-    m_pApi->RegisterSpi(this);
+    //m_pApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
+    //m_pApi->RegisterSpi(this);
 }
 
 CThostFtdcTraderSpiI::~CThostFtdcTraderSpiI()

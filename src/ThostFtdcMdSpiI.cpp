@@ -24,8 +24,8 @@ CThostFtdcMdSpiI::CThostFtdcMdSpiI()
         uv_async_init(uv_default_loop(), &ptask[i]->handle, on_async_cb);
     }
 
-    m_pApi = CThostFtdcMdApi::CreateFtdcMdApi();
-    m_pApi->RegisterSpi(this);         
+    //m_pApi = CThostFtdcMdApi::CreateFtdcMdApi();
+    //m_pApi->RegisterSpi(this);         
 }
 
 CThostFtdcMdSpiI::~CThostFtdcMdSpiI()

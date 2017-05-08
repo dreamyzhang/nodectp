@@ -43,7 +43,9 @@ class WrapMd : public CThostFtdcMdSpiI, public node::ObjectWrap
         static void NewInstance(const v8::FunctionCallbackInfo<v8::Value>& args);
         static void Init(v8::Isolate* isolate);
     
-        static void Init(const v8::FunctionCallbackInfo<v8::Value>& args);                      
+        static void Init(const v8::FunctionCallbackInfo<v8::Value>& args);
+        static void Release(const v8::FunctionCallbackInfo<v8::Value>& args);
+        static void CreateFtdcMdApi(const v8::FunctionCallbackInfo<v8::Value>& args);                      
         static void GetApiVersion(const v8::FunctionCallbackInfo<v8::Value>& args);                      
         static void GetTradingDay(const v8::FunctionCallbackInfo<v8::Value>& args);                      
         static void RegisterFront(const v8::FunctionCallbackInfo<v8::Value>& args);                      

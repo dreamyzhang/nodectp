@@ -7,10 +7,7 @@ node-gyp rebuild
 # execute
 test example
 ```
-node ./mduser.js
-node ./tduser.js
+node ./test/mduser.js
+node ./test/tduser.js
 
 ```
-
-
-

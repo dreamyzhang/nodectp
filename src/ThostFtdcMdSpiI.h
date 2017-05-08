@@ -110,6 +110,8 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
         virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) ;
         
         CThostFtdcMdApi* GetMdApi(){return m_pApi;}
+        void setMdApi(CThostFtdcMdApi*  _m_pApi){ m_pApi = _m_pApi;}
+        void RegisterSpi(){ m_pApi->RegisterSpi(this);}
        
     private:
         static void on_uv_close_cb(uv_handle_t* handle); 

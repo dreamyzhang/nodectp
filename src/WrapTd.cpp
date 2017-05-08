@@ -53,6 +53,8 @@ void WrapTd::Init(v8::Isolate* isolate)
     // Prototype
     NODE_SET_PROTOTYPE_METHOD(tpl, "GetApiVersion"                   , GetApiVersion                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "Init"                            , Init                               );
+    NODE_SET_PROTOTYPE_METHOD(tpl, "Release"                         , Release                            );
+    NODE_SET_PROTOTYPE_METHOD(tpl, "CreateFtdcTraderApi"             , CreateFtdcTraderApi                );
     NODE_SET_PROTOTYPE_METHOD(tpl, "GetTradingDay"                   , GetTradingDay                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "RegisterFront"                   , RegisterFront                      );
     NODE_SET_PROTOTYPE_METHOD(tpl, "RegisterNameServer"              , RegisterNameServer                 );
@@ -330,6 +332,32 @@ void WrapTd::Init(const FunctionCallbackInfo<Value>& args)
     WrapTd* obj = node::ObjectWrap::Unwrap<WrapTd>(args.Holder());
     Isolate* isolate = args.GetIsolate();
     obj->GetTdApi()->Init();
+    args.GetReturnValue().Set(Undefined(isolate));
+}
+
+void WrapTd::Release(const FunctionCallbackInfo<Value>& args)
+{
+    WrapTd* obj = node::ObjectWrap::Unwrap<WrapTd>(args.Holder());
+    Isolate* isolate = args.GetIsolate();
+    obj->GetTdApi()->Release();
+    args.GetReturnValue().Set(Undefined(isolate));
+}
+
+void WrapTd::CreateFtdcTraderApi(const v8::FunctionCallbackInfo<v8::Value>& args)                     
+{
+    WrapTd* obj = node::ObjectWrap::Unwrap<WrapTd>(args.Holder());
+    Isolate* isolate = args.GetIsolate();
+    if (args[0]->IsUndefined())
+    {
+        args[0] = String::NewFromUtf8(isolate, "");
+    }
+    Local<String> flowpath = args[0]->ToString();
+    String::Utf8Value p(flowpath);
+
+    CThostFtdcTraderApi* m_pApi = CThostFtdcTraderApi::CreateFtdcTraderApi((char*)*p);
+
+    obj->setTdApi(m_pApi);
+    obj->RegisterSpi();
     args.GetReturnValue().Set(Undefined(isolate));
 }
 
@@ -636,170 +664,338 @@ void WrapTd::ReqCombActionInsert(const v8::FunctionCallbackInfo<v8::Value>& args
 
 void WrapTd::ReqQryInvestor(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInvestorField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInvestor(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryTradingCode(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryTradingCodeField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryTradingCode(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryInstrumentMarginRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInstrumentMarginRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInstrumentMarginRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryInstrumentCommissionRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInstrumentCommissionRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInstrumentCommissionRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryExchange(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryExchangeField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryExchange(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryDepthMarketData(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryDepthMarketDataField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryDepthMarketData(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQrySettlementInfo(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQrySettlementInfoField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQrySettlementInfo(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryTransferBank(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryTransferBankField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryTransferBank(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryNotice(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryNoticeField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryNotice(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQrySettlementInfoConfirm(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQrySettlementInfoConfirmField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQrySettlementInfoConfirm(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryInvestorPositionCombineDetail(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInvestorPositionCombineDetailField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInvestorPositionCombineDetail(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryCFMMCTradingAccountKey(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryCFMMCTradingAccountKeyField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryCFMMCTradingAccountKey(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryEWarrantOffset(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryEWarrantOffsetField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryEWarrantOffset(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryInvestorProductGroupMargin(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInvestorProductGroupMarginField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInvestorProductGroupMargin(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryExchangeMarginRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryExchangeMarginRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryExchangeMarginRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryExchangeMarginRateAdjust(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryExchangeMarginRateAdjustField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryExchangeMarginRateAdjust(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryExchangeRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryExchangeRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryExchangeRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQrySecAgentACIDMap(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQrySecAgentACIDMapField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQrySecAgentACIDMap(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryProductExchRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryProductExchRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryProductExchRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryProductGroup(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryProductGroupField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryProductGroup(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryMMInstrumentCommissionRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryMMInstrumentCommissionRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryMMInstrumentCommissionRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryMMOptionInstrCommRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryMMOptionInstrCommRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryMMOptionInstrCommRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryInstrumentOrderCommRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryInstrumentOrderCommRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryInstrumentOrderCommRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryOptionInstrTradeCost(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryOptionInstrTradeCostField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryOptionInstrTradeCost(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryOptionInstrCommRate(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryOptionInstrCommRateField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryOptionInstrCommRate(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryExecOrder(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryExecOrderField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryExecOrder(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryForQuote(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryForQuoteField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryForQuote(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryQuote(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryQuoteField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryQuote(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryCombInstrumentGuard(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryCombInstrumentGuardField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryCombInstrumentGuard(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryCombAction(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryCombActionField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryCombAction(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryTransferSerial(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryTransferSerialField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryTransferSerial(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryAccountregister(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryAccountregisterField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryAccountregister(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryContractBank(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryContractBankField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryContractBank(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryParkedOrder(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryParkedOrderField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryParkedOrder(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryParkedOrderAction(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryParkedOrderActionField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryParkedOrderAction(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryTradingNotice(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryTradingNoticeField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryTradingNotice(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryBrokerTradingParams(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryBrokerTradingParamsField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryBrokerTradingParams(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQryBrokerTradingAlgos(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQryBrokerTradingAlgosField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQryBrokerTradingAlgos(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQueryCFMMCTradingAccountToken(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcQueryCFMMCTradingAccountTokenField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQueryCFMMCTradingAccountToken(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqFromBankToFutureByFuture(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcReqTransferField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqFromBankToFutureByFuture(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqFromFutureToBankByFuture(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcReqTransferField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqFromFutureToBankByFuture(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 void WrapTd::ReqQueryBankAccountMoneyByFuture(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    CThostFtdcReqQueryAccountField req;                   
+    REQ_WITH_REQID(req);                                        
+    int r = obj->GetTdApi()->ReqQueryBankAccountMoneyByFuture(&req, reqid);  
+    args.GetReturnValue().Set(Int32::New(isolate, r));
 }
 
 		

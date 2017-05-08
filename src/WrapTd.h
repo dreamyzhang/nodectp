@@ -47,6 +47,8 @@ namespace td
             //参数传递以对象的形式
             static void GetApiVersion(const v8::FunctionCallbackInfo<v8::Value>& args);
             static void Init(const v8::FunctionCallbackInfo<v8::Value>& args);
+            static void Release(const v8::FunctionCallbackInfo<v8::Value>& args);
+            static void CreateFtdcTraderApi(const v8::FunctionCallbackInfo<v8::Value>& args);
             static void GetTradingDay(const v8::FunctionCallbackInfo<v8::Value>& args);
             static void RegisterFront(const v8::FunctionCallbackInfo<v8::Value>& args);
             static void RegisterNameServer(const v8::FunctionCallbackInfo<v8::Value>& args);
