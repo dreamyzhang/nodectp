@@ -460,6 +460,7 @@ void WrapTd::ReqUserLogin(const FunctionCallbackInfo<Value>& args)
 {
     CThostFtdcReqUserLoginField req;                          
     REQ_WITH_REQID(req);
+    printf("------------>%s-------\n\n", req.Password);
     int r = obj->GetTdApi()->ReqUserLogin(&req, reqid);
     args.GetReturnValue().Set(Int32::New(isolate, r));
 }

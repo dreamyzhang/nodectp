@@ -1,12 +1,15 @@
 var ctp = require('bindings')('shifctp');
 var tduser = ctp.crtd();
 var login = Object()
-    login.BrokerID = "4040";
-    login.UserID = "369658";
-    login.Password = "123456";
-var q = Object()
-    q.BrokerID =  "4040"
-    q.InvestorID = "123456"
+    //login.BrokerID = "4040";
+    //login.UserID = "369658";
+    //login.Password = "123456";
+    
+    login.BrokerID = "4500";
+    login.UserID = "8010800705";
+    login.Password = "J105828.";
+ var url = 'tcp://180.166.45.116:41205'
+
 
 function sleep(milliSeconds){
     var startTime = new Date().getTime(); 
