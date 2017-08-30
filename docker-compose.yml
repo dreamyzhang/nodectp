@@ -1,0 +1,15 @@
+version: '2'
+services:
+  nodectp:
+    image: node_ctp:0.1
+    build: .
+    container_name: node_ctp
+    volumes:
+      - .:/root/code
+      - /root/code/node_modules
+    ports:
+      - "5678:5678"
+    environment:
+      - NODE_ENV=production
+    tty: true
+    entrypoint: bash
