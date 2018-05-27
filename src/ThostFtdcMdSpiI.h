@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////
-///@system ctpè¡Œæƒ…nodejs addon
-///@company æ…§ç½‘åŸºé‡‘
+///@system ctpĞĞÇénodejs addon
+///@company »ÛÍø»ù½ğ
 ///@file ThostFtdcMdApiSpi.h
-///@brief ctpçº¿ç¨‹åŠå›è°ƒ
+///@brief ctpÏß³Ì¼°»Øµ÷
 ///@history 
-///20160326	dreamyzhang		åˆ›å»ºè¯¥æ–‡ä»¶
+///20160326	dreamyzhang		´´½¨¸ÃÎÄ¼ş
 /////////////////////////////////////////////////////////////////////////
 #ifndef __THOSTFTDCMDSPI_H__
 #define __THOSTFTDCMDSPI_H__
@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <pthread.h>
-#include <semaphore.h>
+//#include <pthread.h>
+//#include <semaphore.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdint.h>
@@ -35,13 +35,13 @@ namespace md
 
 class CThostFtdcMdSpiI;
 
-//ä»¥apiæ¥åˆ’åˆ†ç»“æ„ä½“
+//ÒÔapiÀ´»®·Ö½á¹¹Ìå
 struct taskdata
 {
     taskdata(CThostFtdcMdSpiI* p){handle.data = this; pmd = p;}
     CThostFtdcMdSpiI* pmd;
     uv_async_t handle;
-    string api;             //è¡¨ç¤ºæ˜¯é‚£ä¸ªapiå›è°ƒ
+    string api;             //±íÊ¾ÊÇÄÇ¸öapi»Øµ÷
     
     void reinit()
     {
@@ -64,7 +64,7 @@ struct taskdata
     }data;
     int nRequestID;
     bool bIsLast;
-    CThostFtdcRspInfoField RspInfo; //å…¬ç”¨è¿”å›
+    CThostFtdcRspInfoField RspInfo; //¹«ÓÃ·µ»Ø
 };
 
 class CThostFtdcMdSpiI : public CThostFtdcMdSpi 
@@ -81,7 +81,7 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
             uv_async_send(handle);
         }
 
-        //ä¸»çº¿ç¨‹å›è°ƒjså¤„ç†
+        //Ö÷Ïß³Ì»Øµ÷js´¦Àí
         virtual void MainOnFrontConnected() = 0;
         virtual void MainOnFrontDisconnected(int nReason) = 0;
         virtual void MainOnHeartBeatWarning(int nTimeLapse) = 0;
@@ -127,7 +127,7 @@ class CThostFtdcMdSpiI : public CThostFtdcMdSpi
         uint32_t task_size;
         uint32_t task_position;
 
-        CThostFtdcMdApi* 	m_pApi; 		        //äº¤æ˜“è¯·æ±‚ç»“æ„ä½“
+        CThostFtdcMdApi* 	m_pApi; 		        //½»Ò×ÇëÇó½á¹¹Ìå
 };
 }
 

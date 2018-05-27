@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////
 ///@system node ctp addon
-///@company æ…§ç½‘åŸºé‡‘
+///@company »ÛÍø»ù½ğ
 ///@file ThostFtdcTraderSpiI.cpp
-///@brief ctpæ¥å£
+///@brief ctp½Ó¿Ú
 ///@history 
-///20160326	dreamyzhang		åˆ›å»ºè¯¥æ–‡ä»¶
+///20160326	dreamyzhang		´´½¨¸ÃÎÄ¼ş
 /////////////////////////////////////////////////////////////////////////
 
 #include "ThostFtdcTraderSpiI.h"
@@ -46,7 +46,7 @@ void CThostFtdcTraderSpiI::on_uv_close_cb(uv_handle_t* handle)
 
 void CThostFtdcTraderSpiI::on_async_cb(uv_async_t* handle)
 {
-    //è°ƒç”¨jsä¸­çš„å›è°ƒå‡½æ•° åœ¨åˆå§‹åŒ–çš„æ—¶å€™æ³¨å†Œçš„
+    //µ÷ÓÃjsÖĞµÄ»Øµ÷º¯Êı ÔÚ³õÊ¼»¯µÄÊ±ºò×¢²áµÄ
     taskdata* task = (taskdata*)handle->data;
     //printf("on_async_cb api=%s\n", task->api.c_str());
     do{
@@ -204,7 +204,7 @@ void CThostFtdcTraderSpiI::OnRspUserPasswordUpdate(CThostFtdcUserPasswordUpdateF
 
 void CThostFtdcTraderSpiI::OnRspTradingAccountPasswordUpdate(CThostFtdcTradingAccountPasswordUpdateField *pTradingAccountPasswordUpdate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///TODO  äº¤æ˜“å¯†ç æ›´æ–°
+	///TODO  ½»Ò×ÃÜÂë¸üĞÂ
     QUEUEPUSH(__FUNCTION__, pTradingAccountPasswordUpdate, sizeof(CThostFtdcTradingAccountPasswordUpdateField), pRspInfo, nRequestID, bIsLast);
 }
 
@@ -215,13 +215,13 @@ void CThostFtdcTraderSpiI::OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrd
 
 void CThostFtdcTraderSpiI::OnRspParkedOrderInsert(CThostFtdcParkedOrderField *pParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///é¢„åŸ‹å•å½•å…¥è¯·æ±‚å“åº”
+	///Ô¤Âñµ¥Â¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pParkedOrder, sizeof(CThostFtdcParkedOrderField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspParkedOrderAction(CThostFtdcParkedOrderActionField *pParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///é¢„åŸ‹æ’¤å•å½•å…¥è¯·æ±‚å“åº”
+	///Ô¤Âñ³·µ¥Â¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pParkedOrderAction, sizeof(CThostFtdcParkedOrderActionField), pRspInfo, nRequestID, bIsLast);
 }
 
@@ -232,7 +232,7 @@ void CThostFtdcTraderSpiI::OnRspOrderAction(CThostFtdcInputOrderActionField *pIn
 
 void CThostFtdcTraderSpiI::OnRspQueryMaxOrderVolume(CThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æŸ¥è¯¢æœ€å¤§æŠ¥å•æ•°é‡å“åº”
+	///²éÑ¯×î´ó±¨µ¥ÊıÁ¿ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pQueryMaxOrderVolume, sizeof(CThostFtdcQueryMaxOrderVolumeField), pRspInfo, nRequestID, bIsLast);
 }
 
@@ -243,55 +243,55 @@ void CThostFtdcTraderSpiI::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoCo
 
 void CThostFtdcTraderSpiI::OnRspRemoveParkedOrder(CThostFtdcRemoveParkedOrderField *pRemoveParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///åˆ é™¤é¢„åŸ‹å•å“åº”
+	///É¾³ıÔ¤Âñµ¥ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pRemoveParkedOrder, sizeof(CThostFtdcRemoveParkedOrderField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspRemoveParkedOrderAction(CThostFtdcRemoveParkedOrderActionField *pRemoveParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///åˆ é™¤é¢„åŸ‹æ’¤å•å“åº”
+	///É¾³ıÔ¤Âñ³·µ¥ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pRemoveParkedOrderAction, sizeof(CThostFtdcRemoveParkedOrderActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspExecOrderInsert(CThostFtdcInputExecOrderField *pInputExecOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æ‰§è¡Œå®£å‘Šå½•å…¥è¯·æ±‚å“åº”
+	///Ö´ĞĞĞû¸æÂ¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputExecOrder, sizeof(CThostFtdcInputExecOrderField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspExecOrderAction(CThostFtdcInputExecOrderActionField *pInputExecOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æ‰§è¡Œå®£å‘Šæ“ä½œè¯·æ±‚å“åº”
+	///Ö´ĞĞĞû¸æ²Ù×÷ÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputExecOrderAction, sizeof(CThostFtdcInputExecOrderActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspForQuoteInsert(CThostFtdcInputForQuoteField *pInputForQuote, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯¢ä»·å½•å…¥è¯·æ±‚å“åº”
+	///Ñ¯¼ÛÂ¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputForQuote, sizeof(CThostFtdcInputForQuoteField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQuoteInsert(CThostFtdcInputQuoteField *pInputQuote, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æŠ¥ä»·å½•å…¥è¯·æ±‚å“åº”
+	///±¨¼ÛÂ¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputQuote, sizeof(CThostFtdcInputQuoteField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQuoteAction(CThostFtdcInputQuoteActionField *pInputQuoteAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æŠ¥ä»·æ“ä½œè¯·æ±‚å“åº”
+	///±¨¼Û²Ù×÷ÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputQuoteAction, sizeof(CThostFtdcInputQuoteActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspBatchOrderAction(CThostFtdcInputBatchOrderActionField *pInputBatchOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æ‰¹é‡æŠ¥å•æ“ä½œè¯·æ±‚å“åº”
+	///ÅúÁ¿±¨µ¥²Ù×÷ÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputBatchOrderAction, sizeof(CThostFtdcInputBatchOrderActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspCombActionInsert(CThostFtdcInputCombActionField *pInputCombAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///ç”³è¯·ç»„åˆå½•å…¥è¯·æ±‚å“åº”
+	///ÉêÇë×éºÏÂ¼ÈëÇëÇóÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInputCombAction, sizeof(CThostFtdcInputCombActionField), pRspInfo, nRequestID, bIsLast);
 }
 
@@ -318,219 +318,219 @@ void CThostFtdcTraderSpiI::OnRspQryTradingAccount(CThostFtdcTradingAccountField 
 
 void CThostFtdcTraderSpiI::OnRspQryInvestor(CThostFtdcInvestorField *pInvestor, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“åº”
+	///ÇëÇó²éÑ¯Í¶×ÊÕßÏìÓ¦
     QUEUEPUSH(__FUNCTION__,pInvestor, sizeof(CThostFtdcInvestorField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryTradingCode(CThostFtdcTradingCodeField *pTradingCode, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“ç¼–ç å“åº”
+	///ÇëÇó²éÑ¯½»Ò×±àÂëÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pTradingCode, sizeof(CThostFtdcTradingCodeField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInstrumentMarginRate(CThostFtdcInstrumentMarginRateField *pInstrumentMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢åˆçº¦ä¿è¯é‡‘ç‡å“åº”
+	///ÇëÇó²éÑ¯ºÏÔ¼±£Ö¤½ğÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInstrumentMarginRate, sizeof(CThostFtdcInstrumentMarginRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInstrumentCommissionRate(CThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢åˆçº¦æ‰‹ç»­è´¹ç‡å“åº”
+	///ÇëÇó²éÑ¯ºÏÔ¼ÊÖĞø·ÑÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInstrumentCommissionRate, sizeof(CThostFtdcInstrumentCommissionRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryExchange(CThostFtdcExchangeField *pExchange, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€å“åº”
+	///ÇëÇó²éÑ¯½»Ò×ËùÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pExchange, sizeof(CThostFtdcExchangeField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryProduct(CThostFtdcProductField *pProduct, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº§å“å“åº”
+	///ÇëÇó²éÑ¯²úÆ·ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pProduct, sizeof(CThostFtdcProductField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢åˆçº¦å“åº”
+	///ÇëÇó²éÑ¯ºÏÔ¼ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInstrument, sizeof(CThostFtdcInstrumentField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢è¡Œæƒ…å“åº”
+	///ÇëÇó²éÑ¯ĞĞÇéÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pDepthMarketData, sizeof(CThostFtdcDepthMarketDataField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQrySettlementInfo(CThostFtdcSettlementInfoField *pSettlementInfo, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…ç»“ç®—ç»“æœå“åº”
+	///ÇëÇó²éÑ¯Í¶×ÊÕß½áËã½á¹ûÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pSettlementInfo, sizeof(CThostFtdcSettlementInfoField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryTransferBank(CThostFtdcTransferBankField *pTransferBank, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢è½¬å¸é“¶è¡Œå“åº”
+	///ÇëÇó²éÑ¯×ªÕÊÒøĞĞÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pTransferBank, sizeof(CThostFtdcTransferBankField), pRspInfo, nRequestID, bIsLast);
 
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
+	///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInvestorPositionDetail, sizeof(CThostFtdcInvestorPositionDetailField), pRspInfo, nRequestID, bIsLast);
 
 }
 
 void CThostFtdcTraderSpiI::OnRspQryNotice(CThostFtdcNoticeField *pNotice, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢å®¢æˆ·é€šçŸ¥å“åº”
+	///ÇëÇó²éÑ¯¿Í»§Í¨ÖªÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pNotice, sizeof(CThostFtdcNoticeField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQrySettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç»“ç®—ä¿¡æ¯ç¡®è®¤å“åº”
+	///ÇëÇó²éÑ¯½áËãĞÅÏ¢È·ÈÏÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pSettlementInfoConfirm, sizeof(CThostFtdcSettlementInfoConfirmField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInvestorPositionCombineDetail(CThostFtdcInvestorPositionCombineDetailField *pInvestorPositionCombineDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
+	///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInvestorPositionCombineDetail, sizeof(CThostFtdcInvestorPositionCombineDetailField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryCFMMCTradingAccountKey(CThostFtdcCFMMCTradingAccountKeyField *pCFMMCTradingAccountKey, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æŸ¥è¯¢ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸èµ„é‡‘è´¦æˆ·å¯†é’¥å“åº”
+	///²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pCFMMCTradingAccountKey, sizeof(CThostFtdcCFMMCTradingAccountKeyField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryEWarrantOffset(CThostFtdcEWarrantOffsetField *pEWarrantOffset, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ä»“å•æŠ˜æŠµä¿¡æ¯å“åº”
+	///ÇëÇó²éÑ¯²Öµ¥ÕÛµÖĞÅÏ¢ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pEWarrantOffset, sizeof(CThostFtdcEWarrantOffsetField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInvestorProductGroupMargin(CThostFtdcInvestorProductGroupMarginField *pInvestorProductGroupMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘å“åº”
+	///ÇëÇó²éÑ¯Í¶×ÊÕßÆ·ÖÖ/¿çÆ·ÖÖ±£Ö¤½ğÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInvestorProductGroupMargin, sizeof(CThostFtdcInvestorProductGroupMarginField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryExchangeMarginRate(CThostFtdcExchangeMarginRateField *pExchangeMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€ä¿è¯é‡‘ç‡å“åº”
+	///ÇëÇó²éÑ¯½»Ò×Ëù±£Ö¤½ğÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pExchangeMarginRate, sizeof(CThostFtdcExchangeMarginRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryExchangeMarginRateAdjust(CThostFtdcExchangeMarginRateAdjustField *pExchangeMarginRateAdjust, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€è°ƒæ•´ä¿è¯é‡‘ç‡å“åº”
+	///ÇëÇó²éÑ¯½»Ò×Ëùµ÷Õû±£Ö¤½ğÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pExchangeMarginRateAdjust, sizeof(CThostFtdcExchangeMarginRateAdjustField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryExchangeRate(CThostFtdcExchangeRateField *pExchangeRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æ±‡ç‡å“åº”
+	///ÇëÇó²éÑ¯»ãÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pExchangeRate, sizeof(CThostFtdcExchangeRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQrySecAgentACIDMap(CThostFtdcSecAgentACIDMapField *pSecAgentACIDMap, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äºŒçº§ä»£ç†æ“ä½œå‘˜é“¶æœŸæƒé™å“åº”
+	///ÇëÇó²éÑ¯¶ş¼¶´úÀí²Ù×÷Ô±ÒøÆÚÈ¨ÏŞÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pSecAgentACIDMap, sizeof(CThostFtdcSecAgentACIDMapField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryProductExchRate(CThostFtdcProductExchRateField *pProductExchRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº§å“æŠ¥ä»·æ±‡ç‡
+	///ÇëÇó²éÑ¯²úÆ·±¨¼Û»ãÂÊ
     QUEUEPUSH(__FUNCTION__, pProductExchRate, sizeof(CThostFtdcProductExchRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryProductGroup(CThostFtdcProductGroupField *pProductGroup, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº§å“ç»„
+	///ÇëÇó²éÑ¯²úÆ·×é
     QUEUEPUSH(__FUNCTION__, pProductGroup, sizeof(CThostFtdcProductGroupField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryMMInstrumentCommissionRate(CThostFtdcMMInstrumentCommissionRateField *pMMInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢åšå¸‚å•†åˆçº¦æ‰‹ç»­è´¹ç‡å“åº”
+	///ÇëÇó²éÑ¯×öÊĞÉÌºÏÔ¼ÊÖĞø·ÑÂÊÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pMMInstrumentCommissionRate, sizeof(CThostFtdcMMInstrumentCommissionRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryMMOptionInstrCommRate(CThostFtdcMMOptionInstrCommRateField *pMMOptionInstrCommRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢åšå¸‚å•†æœŸæƒåˆçº¦æ‰‹ç»­è´¹å“åº”
+	///ÇëÇó²éÑ¯×öÊĞÉÌÆÚÈ¨ºÏÔ¼ÊÖĞø·ÑÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pMMOptionInstrCommRate, sizeof(CThostFtdcMMOptionInstrCommRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryInstrumentOrderCommRate(CThostFtdcInstrumentOrderCommRateField *pInstrumentOrderCommRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ¥å•æ‰‹ç»­è´¹å“åº”
+	///ÇëÇó²éÑ¯±¨µ¥ÊÖĞø·ÑÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pInstrumentOrderCommRate, sizeof(CThostFtdcInstrumentOrderCommRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryOptionInstrTradeCost(CThostFtdcOptionInstrTradeCostField *pOptionInstrTradeCost, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æœŸæƒäº¤æ˜“æˆæœ¬å“åº”
+	///ÇëÇó²éÑ¯ÆÚÈ¨½»Ò×³É±¾ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pOptionInstrTradeCost, sizeof(CThostFtdcOptionInstrTradeCostField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryOptionInstrCommRate(CThostFtdcOptionInstrCommRateField *pOptionInstrCommRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æœŸæƒåˆçº¦æ‰‹ç»­è´¹å“åº”
+	///ÇëÇó²éÑ¯ÆÚÈ¨ºÏÔ¼ÊÖĞø·ÑÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pOptionInstrCommRate, sizeof(CThostFtdcOptionInstrCommRateField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryExecOrder(CThostFtdcExecOrderField *pExecOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æ‰§è¡Œå®£å‘Šå“åº”
+	///ÇëÇó²éÑ¯Ö´ĞĞĞû¸æÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pExecOrder, sizeof(CThostFtdcExecOrderField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryForQuote(CThostFtdcForQuoteField *pForQuote, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢è¯¢ä»·å“åº”
+	///ÇëÇó²éÑ¯Ñ¯¼ÛÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pForQuote, sizeof(CThostFtdcForQuoteField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryQuote(CThostFtdcQuoteField *pQuote, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢æŠ¥ä»·å“åº”
+	///ÇëÇó²éÑ¯±¨¼ÛÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pQuote, sizeof(CThostFtdcQuoteField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryCombInstrumentGuard(CThostFtdcCombInstrumentGuardField *pCombInstrumentGuard, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç»„åˆåˆçº¦å®‰å…¨ç³»æ•°å“åº”
+	///ÇëÇó²éÑ¯×éºÏºÏÔ¼°²È«ÏµÊıÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pCombInstrumentGuard, sizeof(CThostFtdcCombInstrumentGuardField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryCombAction(CThostFtdcCombActionField *pCombAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç”³è¯·ç»„åˆå“åº”
+	///ÇëÇó²éÑ¯ÉêÇë×éºÏÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pCombAction, sizeof(CThostFtdcCombActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryTransferSerial(CThostFtdcTransferSerialField *pTransferSerial, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢è½¬å¸æµæ°´å“åº”
+	///ÇëÇó²éÑ¯×ªÕÊÁ÷Ë®ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pTransferSerial, sizeof(CThostFtdcTransferSerialField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryAccountregister(CThostFtdcAccountregisterField *pAccountregister, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢é“¶æœŸç­¾çº¦å…³ç³»å“åº”
+	///ÇëÇó²éÑ¯ÒøÆÚÇ©Ô¼¹ØÏµÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pAccountregister, sizeof(CThostFtdcAccountregisterField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///é”™è¯¯åº”ç­”
+	///´íÎóÓ¦´ğ
     QUEUEPUSH(__FUNCTION__, NULL, 0, pRspInfo, nRequestID, bIsLast);
 }
 
@@ -546,7 +546,7 @@ void CThostFtdcTraderSpiI::OnRtnTrade(CThostFtdcTradeField *pTrade)
 
 void CThostFtdcTraderSpiI::OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æŠ¥å•å½•å…¥é”™è¯¯å›æŠ¥
+	///±¨µ¥Â¼Èë´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pInputOrder, sizeof(CThostFtdcInputOrderField), pRspInfo);
 }
 
@@ -557,271 +557,271 @@ void CThostFtdcTraderSpiI::OnErrRtnOrderAction(CThostFtdcOrderActionField *pOrde
 
 void CThostFtdcTraderSpiI::OnRtnInstrumentStatus(CThostFtdcInstrumentStatusField *pInstrumentStatus) 
 {
-	///åˆçº¦äº¤æ˜“çŠ¶æ€é€šçŸ¥
+	///ºÏÔ¼½»Ò××´Ì¬Í¨Öª
     QUEUEPUSH(__FUNCTION__, pInstrumentStatus, sizeof(CThostFtdcInstrumentStatusField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnBulletin(CThostFtdcBulletinField *pBulletin) 
 {
-	///äº¤æ˜“æ‰€å…¬å‘Šé€šçŸ¥
+	///½»Ò×Ëù¹«¸æÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pBulletin, sizeof(CThostFtdcBulletinField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnTradingNotice(CThostFtdcTradingNoticeInfoField *pTradingNoticeInfo) 
 {
-	///äº¤æ˜“é€šçŸ¥
+	///½»Ò×Í¨Öª
     QUEUEPUSH(__FUNCTION__, pTradingNoticeInfo, sizeof(CThostFtdcTradingNoticeInfoField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnErrorConditionalOrder(CThostFtdcErrorConditionalOrderField *pErrorConditionalOrder) 
 {
-	///æç¤ºæ¡ä»¶å•æ ¡éªŒé”™è¯¯
+	///ÌáÊ¾Ìõ¼şµ¥Ğ£Ñé´íÎó
     QUEUEPUSH(__FUNCTION__, pErrorConditionalOrder, sizeof(CThostFtdcErrorConditionalOrderField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnExecOrder(CThostFtdcExecOrderField *pExecOrder) 
 {
-	///æ‰§è¡Œå®£å‘Šé€šçŸ¥
+	///Ö´ĞĞĞû¸æÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pExecOrder, sizeof(CThostFtdcExecOrderField));
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnExecOrderInsert(CThostFtdcInputExecOrderField *pInputExecOrder, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æ‰§è¡Œå®£å‘Šå½•å…¥é”™è¯¯å›æŠ¥
+	///Ö´ĞĞĞû¸æÂ¼Èë´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pInputExecOrder, sizeof(CThostFtdcInputExecOrderField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnExecOrderAction(CThostFtdcExecOrderActionField *pExecOrderAction, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æ‰§è¡Œå®£å‘Šæ“ä½œé”™è¯¯å›æŠ¥
+	///Ö´ĞĞĞû¸æ²Ù×÷´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pExecOrderAction, sizeof(CThostFtdcExecOrderActionField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnForQuoteInsert(CThostFtdcInputForQuoteField *pInputForQuote, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///è¯¢ä»·å½•å…¥é”™è¯¯å›æŠ¥
+	///Ñ¯¼ÛÂ¼Èë´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pInputForQuote, sizeof(CThostFtdcInputForQuoteField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnRtnQuote(CThostFtdcQuoteField *pQuote) 
 {
-	///æŠ¥ä»·é€šçŸ¥
+	///±¨¼ÛÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pQuote, sizeof(CThostFtdcQuoteField));
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnQuoteInsert(CThostFtdcInputQuoteField *pInputQuote, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æŠ¥ä»·å½•å…¥é”™è¯¯å›æŠ¥
+	///±¨¼ÛÂ¼Èë´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pInputQuote, sizeof(CThostFtdcInputQuoteField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnQuoteAction(CThostFtdcQuoteActionField *pQuoteAction, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æŠ¥ä»·æ“ä½œé”™è¯¯å›æŠ¥
+	///±¨¼Û²Ù×÷´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pQuoteAction, sizeof(CThostFtdcQuoteActionField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) 
 {
-	///è¯¢ä»·é€šçŸ¥
+	///Ñ¯¼ÛÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pForQuoteRsp, sizeof(CThostFtdcForQuoteRspField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnCFMMCTradingAccountToken(CThostFtdcCFMMCTradingAccountTokenField *pCFMMCTradingAccountToken) 
 {
-	///ä¿è¯é‡‘ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+	///±£Ö¤½ğ¼à¿ØÖĞĞÄÓÃ»§ÁîÅÆ
     QUEUEPUSH(__FUNCTION__, pCFMMCTradingAccountToken, sizeof(CThostFtdcCFMMCTradingAccountTokenField));
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnBatchOrderAction(CThostFtdcBatchOrderActionField *pBatchOrderAction, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æ‰¹é‡æŠ¥å•æ“ä½œé”™è¯¯å›æŠ¥
+	///ÅúÁ¿±¨µ¥²Ù×÷´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pBatchOrderAction, sizeof(CThostFtdcBatchOrderActionField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnRtnCombAction(CThostFtdcCombActionField *pCombAction) 
 {	
-	///ç”³è¯·ç»„åˆé€šçŸ¥
+	///ÉêÇë×éºÏÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pCombAction, sizeof(CThostFtdcCombActionField));
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnCombActionInsert(CThostFtdcInputCombActionField *pInputCombAction, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///ç”³è¯·ç»„åˆå½•å…¥é”™è¯¯å›æŠ¥
+	///ÉêÇë×éºÏÂ¼Èë´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pInputCombAction, sizeof(CThostFtdcInputCombActionField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryContractBank(CThostFtdcContractBankField *pContractBank, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç­¾çº¦é“¶è¡Œå“åº”
+	///ÇëÇó²éÑ¯Ç©Ô¼ÒøĞĞÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pContractBank, sizeof(CThostFtdcContractBankField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryParkedOrder(CThostFtdcParkedOrderField *pParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹å•å“åº”
+	///ÇëÇó²éÑ¯Ô¤Âñµ¥ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pParkedOrder, sizeof(CThostFtdcParkedOrderField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryParkedOrderAction(CThostFtdcParkedOrderActionField *pParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹æ’¤å•å“åº”
+	///ÇëÇó²éÑ¯Ô¤Âñ³·µ¥ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pParkedOrderAction, sizeof(CThostFtdcParkedOrderActionField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryTradingNotice(CThostFtdcTradingNoticeField *pTradingNotice, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“é€šçŸ¥å“åº”
+	///ÇëÇó²éÑ¯½»Ò×Í¨ÖªÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pTradingNotice, sizeof(CThostFtdcTradingNoticeField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryBrokerTradingParams(CThostFtdcBrokerTradingParamsField *pBrokerTradingParams, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“å‚æ•°å“åº”
+	///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×²ÎÊıÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pBrokerTradingParams, sizeof(CThostFtdcBrokerTradingParamsField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQryBrokerTradingAlgos(CThostFtdcBrokerTradingAlgosField *pBrokerTradingAlgos, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“ç®—æ³•å“åº”
+	///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×Ëã·¨ÏìÓ¦
     QUEUEPUSH(__FUNCTION__, pBrokerTradingAlgos, sizeof(CThostFtdcBrokerTradingAlgosField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQueryCFMMCTradingAccountToken(CThostFtdcQueryCFMMCTradingAccountTokenField *pQueryCFMMCTradingAccountToken, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///è¯·æ±‚æŸ¥è¯¢ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+	///ÇëÇó²éÑ¯¼à¿ØÖĞĞÄÓÃ»§ÁîÅÆ
     QUEUEPUSH(__FUNCTION__, pQueryCFMMCTradingAccountToken, sizeof(CThostFtdcQueryCFMMCTradingAccountTokenField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRtnFromBankToFutureByBank(CThostFtdcRspTransferField *pRspTransfer) 
 {
-	///é“¶è¡Œå‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
+	///ÒøĞĞ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspTransfer, sizeof(CThostFtdcRspTransferField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnFromFutureToBankByBank(CThostFtdcRspTransferField *pRspTransfer) 
 {
-	///é“¶è¡Œå‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
+	///ÒøĞĞ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspTransfer, sizeof(CThostFtdcRspTransferField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromBankToFutureByBank(CThostFtdcRspRepealField *pRspRepeal) 
 {
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
-	///é“¶è¡Œå‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é€šçŸ¥
+	///ÒøĞĞ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÍ¨Öª
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromFutureToBankByBank(CThostFtdcRspRepealField *pRspRepeal) 
 {
-	///é“¶è¡Œå‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé€šçŸ¥
+	///ÒøĞĞ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnFromBankToFutureByFuture(CThostFtdcRspTransferField *pRspTransfer)
 {
-	///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
+	///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspTransfer, sizeof(CThostFtdcRspTransferField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnFromFutureToBankByFuture(CThostFtdcRspTransferField *pRspTransfer)
 {
-	///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
+	///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspTransfer, sizeof(CThostFtdcRspTransferField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromBankToFutureByFutureManual(CThostFtdcRspRepealField *pRspRepeal)
 {
-	///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+	///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromFutureToBankByFutureManual(CThostFtdcRspRepealField *pRspRepeal) 
 {
-	///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+	///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnQueryBankBalanceByFuture(CThostFtdcNotifyQueryAccountField *pNotifyQueryAccount) 
 {
-	///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é€šçŸ¥
+	///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pNotifyQueryAccount, sizeof(CThostFtdcNotifyQueryAccountField));
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnBankToFutureByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é”™è¯¯å›æŠ¥
+	///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õ´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pReqTransfer, sizeof(CThostFtdcReqTransferField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnFutureToBankByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
+	///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞ´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pReqTransfer, sizeof(CThostFtdcReqTransferField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnRepealBankToFutureByFutureManual(CThostFtdcReqRepealField *pReqRepeal, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é”™è¯¯å›æŠ¥
+	///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õ´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pReqRepeal, sizeof(CThostFtdcReqRepealField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnRepealFutureToBankByFutureManual(CThostFtdcReqRepealField *pReqRepeal, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
+	///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞ´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pReqRepeal, sizeof(CThostFtdcReqRepealField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnErrRtnQueryBankBalanceByFuture(CThostFtdcReqQueryAccountField *pReqQueryAccount, CThostFtdcRspInfoField *pRspInfo) 
 {
-	///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é”™è¯¯å›æŠ¥
+	///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶î´íÎó»Ø±¨
     QUEUEPUSH(__FUNCTION__, pReqQueryAccount, sizeof(CThostFtdcReqQueryAccountField), pRspInfo);
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromBankToFutureByFuture(CThostFtdcRspRepealField *pRspRepeal) 
 {
-	///æœŸè´§å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+	///ÆÚ»õ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnRepealFromFutureToBankByFuture(CThostFtdcRspRepealField *pRspRepeal) 
 {
-	///æœŸè´§å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+	///ÆÚ»õ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pRspRepeal, sizeof(CThostFtdcRspRepealField));
 }
 
 void CThostFtdcTraderSpiI::OnRspFromBankToFutureByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§åº”ç­”
+	///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÓ¦´ğ
     QUEUEPUSH(__FUNCTION__, pReqTransfer, sizeof(CThostFtdcReqTransferField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspFromFutureToBankByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œåº”ç­”
+	///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÓ¦´ğ
     QUEUEPUSH(__FUNCTION__, pReqTransfer, sizeof(CThostFtdcReqTransferField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRspQueryBankAccountMoneyByFuture(CThostFtdcReqQueryAccountField *pReqQueryAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
-	///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢åº”ç­”
+	///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÓ¦´ğ
     QUEUEPUSH(__FUNCTION__, pReqQueryAccount, sizeof(CThostFtdcReqQueryAccountField), pRspInfo, nRequestID, bIsLast);
 }
 
 void CThostFtdcTraderSpiI::OnRtnOpenAccountByBank(CThostFtdcOpenAccountField *pOpenAccount) 
 {
-	///é“¶è¡Œå‘èµ·é“¶æœŸå¼€æˆ·é€šçŸ¥
+	///ÒøĞĞ·¢ÆğÒøÆÚ¿ª»§Í¨Öª
     QUEUEPUSH(__FUNCTION__, pOpenAccount, sizeof(CThostFtdcOpenAccountField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnCancelAccountByBank(CThostFtdcCancelAccountField *pCancelAccount)
 {
-	///é“¶è¡Œå‘èµ·é“¶æœŸé”€æˆ·é€šçŸ¥
+	///ÒøĞĞ·¢ÆğÒøÆÚÏú»§Í¨Öª
     QUEUEPUSH(__FUNCTION__, pCancelAccount, sizeof(CThostFtdcCancelAccountField));
 }
 
 void CThostFtdcTraderSpiI::OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccount)
 {	
-	///é“¶è¡Œå‘èµ·å˜æ›´é“¶è¡Œè´¦å·é€šçŸ¥
+	///ÒøĞĞ·¢Æğ±ä¸üÒøĞĞÕËºÅÍ¨Öª
     QUEUEPUSH(__FUNCTION__, pChangeAccount, sizeof(CThostFtdcChangeAccountField));
 }
 

@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////
-///@system ctpè¡Œæƒ…nodejs addon
-///@company æ…§ç½‘åŸºé‡‘
+///@system ctpÐÐÇénodejs addon
+///@company »ÛÍø»ù½ð
 ///@file ThostFtdcMdApiSpiI.cpp
-///@brief å®šä¹‰äº†ctpçº¿ç¨‹åŠå›žè°ƒ
+///@brief ¶¨ÒåÁËctpÏß³Ì¼°»Øµ÷
 ///@history 
-///20160326	dreamyzhang		åˆ›å»ºè¯¥æ–‡ä»¶
+///20160326	dreamyzhang		´´½¨¸ÃÎÄ¼þ
 /////////////////////////////////////////////////////////////////////////
 
 #include "ThostFtdcMdSpiI.h"
@@ -74,7 +74,7 @@ void CThostFtdcMdSpiI::on_async_cb(uv_async_t* handle)
     if(t->api != "") {printf("%s process fail. task queue is full.\n", func);return;}\
     t->api = func;\
 
-/////////////////////////////onå›žè°ƒå‡½æ•°///////////////////////////////////////////////////////////
+/////////////////////////////on»Øµ÷º¯Êý///////////////////////////////////////////////////////////
 void CThostFtdcMdSpiI::OnFrontConnected()
 {
     //taskdata* t = new taskdata(this);

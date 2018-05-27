@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////
-///@system ctp è¡Œæƒ…nodejs addon
-///@company æ…§ç½‘åŸºé‡‘
+///@system ctp ĞĞÇénodejs addon
+///@company »ÛÍø»ù½ğ
 ///@file WrapMd.cpp
-///@brief jså›è°ƒæ¥å£
+///@brief js»Øµ÷½Ó¿Ú
 ///@history 
-///20160326	dreamyzhang		åˆ›å»ºè¯¥æ–‡ä»¶
+///20160326	dreamyzhang		´´½¨¸ÃÎÄ¼ş
 /////////////////////////////////////////////////////////////////////////
 
 #include "WrapMd.h"
@@ -30,8 +30,8 @@ using v8::Boolean;
 using v8::Handle;
 
 
-set<string>         WrapMd::m_event;                //å¯ä»¥æ³¨å†Œçš„å›è°ƒäº‹ä»¶
-Persistent<Function> WrapMd::constructor;           //ä¸»åŠ¨è¯·æ±‚å‡½æ•°æ˜ å°„js name
+set<string>         WrapMd::m_event;                //¿ÉÒÔ×¢²áµÄ»Øµ÷ÊÂ¼ş
+Persistent<Function> WrapMd::constructor;           //Ö÷¶¯ÇëÇóº¯ÊıÓ³Éäjs name
 
 
 WrapMd::WrapMd()
@@ -47,7 +47,7 @@ WrapMd::~WrapMd()
 
 void WrapMd::Init(Isolate* isolate) 
 {
-    //ä¸»åŠ¨è¯·æ±‚å‡½æ•°çš„æ˜ å°„
+    //Ö÷¶¯ÇëÇóº¯ÊıµÄÓ³Éä
     // Prepare constructor template
     Local<FunctionTemplate> tpl = FunctionTemplate::New(isolate, New);
     tpl->SetClassName(String::NewFromUtf8(isolate, "WrapMd"));
@@ -71,7 +71,7 @@ void WrapMd::Init(Isolate* isolate)
     NODE_SET_PROTOTYPE_METHOD(tpl, "On", On);
     constructor.Reset(isolate, tpl->GetFunction());
 
-    //æ³¨å†Œå›è°ƒå‡½æ•°çš„æ˜ å°„æ›´æ–°
+    //×¢²á»Øµ÷º¯ÊıµÄÓ³Éä¸üĞÂ
     m_event.insert("OnFrontConnected");
     m_event.insert("OnFrontDisconnected");
     m_event.insert("OnHeartBeatWarning");
@@ -379,7 +379,7 @@ void WrapMd::UnSubscribeForQuoteRsp(const FunctionCallbackInfo<Value>& args)
 }
 
 
-/////////////////////////////onå›è°ƒå‡½æ•°///////////////////////////////////////////////////////////
+/////////////////////////////on»Øµ÷º¯Êı///////////////////////////////////////////////////////////
 void WrapMd::MainOnFrontConnected()
 {
     Isolate* isolate = Isolate::GetCurrent();
