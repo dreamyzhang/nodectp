@@ -12,18 +12,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-//#include <pthread.h>
-//#include <semaphore.h>
-#include <unistd.h>
 #include <string.h>
 #include <stdint.h>
 #include <set>
 #include <map>
 #include <string>
-#include <sys/time.h>
 #include <node.h>
 #include <node_object_wrap.h>
-#include <iconv.h>
+
+#include "comm.h"
 
 #include "ThostFtdcMdSpiI.h"
 #include "ctp_node.h"

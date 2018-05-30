@@ -11,7 +11,7 @@
 #define __WRAPTD_H__
 
 //#include <sys/socket.h>
-#include <netdb.h>
+//#include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -19,12 +19,13 @@
 #include <string>
 #include <math.h>
 //#include <pthread.h>
-#include <unistd.h>
 #include <map>
 #include <node.h>
 #include <node_object_wrap.h>
-#include <iconv.h>
+
 #include <set>
+
+#include "comm.h"
 
 #include "ThostFtdcTraderSpiI.h"
 #include "ctp_node.h"

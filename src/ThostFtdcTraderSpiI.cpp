@@ -14,7 +14,7 @@ namespace td
 
 CThostFtdcTraderSpiI::CThostFtdcTraderSpiI()
 {
-    task_size = 1000;
+    task_size = 10000;
     task_position = 0;
     ptask = new taskdata* [task_size];
     for(uint32_t i=0; i<task_size; i++)

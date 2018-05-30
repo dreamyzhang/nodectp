@@ -10,7 +10,7 @@
 #define __THOSTFTDCTRADERSPI_H__
 
 //#include <sys/socket.h>
-#include <netdb.h>
+//#include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -19,9 +19,10 @@
 #include <string.h>
 #include <math.h>
 //#include <pthread.h>
-#include <unistd.h>
 #include <map>
 #include <uv.h>
+
+#include "comm.h"
 
 #include "ThostFtdcUserApiDataType.h"                       
 #include "ThostFtdcUserApiStruct.h"                         

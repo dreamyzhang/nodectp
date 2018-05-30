@@ -14,14 +14,14 @@
 #include <iostream>
 //#include <pthread.h>
 //#include <semaphore.h>
-#include <unistd.h>
 #include <string.h>
 #include <stdint.h>
 #include <set>
 #include <map>
 #include <string>
-#include <sys/time.h>
 #include <uv.h>
+
+#include "comm.h"
 
 // CTP
 #include "ThostFtdcUserApiDataType.h"
