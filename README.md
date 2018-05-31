@@ -10,7 +10,7 @@ node ./test/mduser.js
 ```
 # linux
 ```
-cp binding-windows.gyp  binding.gy
+cp binding-linux.gyp  binding.gy
 node-gyp rebuild
 node ./test/mduser.js
 #node ./test/tduser.js
