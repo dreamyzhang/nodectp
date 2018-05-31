@@ -78,7 +78,7 @@ void CThostFtdcMdSpiI::on_async_cb(uv_async_t* handle)
 void CThostFtdcMdSpiI::OnFrontConnected()
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
     uv_async_send_s(&t->handle);
 }
@@ -86,7 +86,7 @@ void CThostFtdcMdSpiI::OnFrontConnected()
 void CThostFtdcMdSpiI::OnFrontDisconnected(int nReason)
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.nReason = nReason;
     //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
     uv_async_send_s(&t->handle);
@@ -95,7 +95,7 @@ void CThostFtdcMdSpiI::OnFrontDisconnected(int nReason)
 void CThostFtdcMdSpiI::OnHeartBeatWarning(int nTimeLapse)
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.nTimeLapse = nTimeLapse;
     //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
     uv_async_send_s(&t->handle);
@@ -104,7 +104,7 @@ void CThostFtdcMdSpiI::OnHeartBeatWarning(int nTimeLapse)
 void CThostFtdcMdSpiI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.RspUserLogin = *pRspUserLogin;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -116,7 +116,7 @@ void CThostFtdcMdSpiI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
 void CThostFtdcMdSpiI::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.UserLogout = *pUserLogout;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -128,7 +128,7 @@ void CThostFtdcMdSpiI::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, C
 void CThostFtdcMdSpiI::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
     t->bIsLast = bIsLast;
@@ -139,7 +139,7 @@ void CThostFtdcMdSpiI::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequest
 void CThostFtdcMdSpiI::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.SpecificInstrument = *pSpecificInstrument;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -151,7 +151,7 @@ void CThostFtdcMdSpiI::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSp
 void CThostFtdcMdSpiI::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.SpecificInstrument = *pSpecificInstrument;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -163,7 +163,7 @@ void CThostFtdcMdSpiI::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *p
 void CThostFtdcMdSpiI::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.SpecificInstrument = *pSpecificInstrument;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -175,7 +175,7 @@ void CThostFtdcMdSpiI::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pS
 void CThostFtdcMdSpiI::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.SpecificInstrument = *pSpecificInstrument;
     t->RspInfo = *pRspInfo;
     t->nRequestID = nRequestID;
@@ -187,7 +187,7 @@ void CThostFtdcMdSpiI::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 void CThostFtdcMdSpiI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.DepthMarketData = *pDepthMarketData;
     //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
     uv_async_send_s(&t->handle);
@@ -196,7 +196,7 @@ void CThostFtdcMdSpiI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 void CThostFtdcMdSpiI::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) 
 {
     //taskdata* t = new taskdata(this);
-    GET_TASK(__FUNCTION__);
+    GET_TASK(_FUNCTION_);
     t->data.ForQuoteRsp = *pForQuoteRsp;
     //uv_queue_work(uv_default_loop(), &t->work, _on_async_queue, _on_completed);
     uv_async_send_s(&t->handle);
