@@ -385,7 +385,7 @@ void WrapMd::MainOnFrontConnected()
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnFrontConnected");            
+    __callback_iter_type it = callback_map.find("OnFrontConnected");            
     if(it == callback_map.end()) return;
 
     Local<Function> cb = Local<Function>::New(isolate, it->second);
@@ -397,7 +397,7 @@ void WrapMd::MainOnFrontDisconnected(int nReason)
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnFrontDisconnected");
+   __callback_iter_type it = callback_map.find("OnFrontDisconnected");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[1] = { Local<Value>::New(isolate, Int32::New(isolate, nReason)) };    
@@ -411,7 +411,7 @@ void WrapMd::MainOnHeartBeatWarning(int nTimeLapse)
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnHeartBeatWarning");
+    __callback_iter_type it = callback_map.find("OnHeartBeatWarning");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[1] = { Local<Value>::New(isolate, Int32::New(isolate, nTimeLapse)) };    
@@ -425,7 +425,7 @@ void WrapMd::MainOnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CTho
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspUserLogin");
+    __callback_iter_type it = callback_map.find("OnRspUserLogin");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -465,7 +465,7 @@ void WrapMd::MainOnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostF
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspUserLogout");
+    __callback_iter_type it = callback_map.find("OnRspUserLogout");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -494,7 +494,7 @@ void WrapMd::MainOnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bo
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspError");
+    __callback_iter_type it = callback_map.find("OnRspError");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[3];
@@ -511,7 +511,7 @@ void WrapMd::MainOnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecific
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspSubMarketData");
+    __callback_iter_type it = callback_map.find("OnRspSubMarketData");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -539,7 +539,7 @@ void WrapMd::MainOnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecif
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspUnSubMarketData");
+    __callback_iter_type it = callback_map.find("OnRspUnSubMarketData");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -566,7 +566,7 @@ void WrapMd::MainOnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecifi
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspSubForQuoteRsp");
+    __callback_iter_type it = callback_map.find("OnRspSubForQuoteRsp");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -593,7 +593,7 @@ void WrapMd::MainOnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpeci
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRspUnSubForQuoteRsp");
+    __callback_iter_type it = callback_map.find("OnRspUnSubForQuoteRsp");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[4];
@@ -621,7 +621,7 @@ void WrapMd::MainOnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMark
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRtnDepthMarketData");
+    __callback_iter_type it = callback_map.find("OnRtnDepthMarketData");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[1];
@@ -688,7 +688,7 @@ void WrapMd::MainOnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp)
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-    typeof(callback_map.begin()) it = callback_map.find("OnRtnForQuoteRsp");
+    __callback_iter_type it = callback_map.find("OnRtnForQuoteRsp");
     if(it == callback_map.end()) return;
 
     Local<Value> argv[1];

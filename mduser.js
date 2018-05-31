@@ -1,4 +1,5 @@
-var ctp = require('bindings')('shifctp');
+//var ctp = require('bindings')('shifctp');
+var ctp = require('./build/Release/shifctp');
 
 var mduser = ctp.crmd();
 var login = Object()

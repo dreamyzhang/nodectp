@@ -1005,7 +1005,7 @@ void WrapTd::ReqQueryBankAccountMoneyByFuture(const v8::FunctionCallbackInfo<v8:
 Isolate* isolate = Isolate::GetCurrent();\
 HandleScope scope(isolate);\
 string k = string(__FUNCTION__).substr(4);\
-typeof(callback_map.begin()) it = callback_map.find(k);\
+__callback_iter_type it = callback_map.find(k);\
 if(it == callback_map.end()) return;
 
 void WrapTd::MainOnFrontConnected()
@@ -1035,7 +1035,7 @@ void WrapTd::MainOnHeartBeatWarning(int nTimeLapse)
 Isolate* isolate = Isolate::GetCurrent();\
 HandleScope scope(isolate);\
 string k = string(__FUNCTION__).substr(4);\
-typeof(callback_map.begin()) it = callback_map.find(k);\
+__callback_iter_type it = callback_map.find(k);\
 if(it == callback_map.end()) return;\
 Local<Value> argv[1];\
 if(rsp != NULL)\
@@ -1055,7 +1055,7 @@ cb->Call(Null(isolate), 1, argv);
 Isolate* isolate = Isolate::GetCurrent();\
 HandleScope scope(isolate);\
 string k = string(__FUNCTION__).substr(4);\
-typeof(callback_map.begin()) it = callback_map.find(k);\
+__callback_iter_type it = callback_map.find(k);\
 if(it == callback_map.end()) return;\
 Local<Value> argv[2];\
 if(rsp != NULL)\
@@ -1077,7 +1077,7 @@ cb->Call(Null(isolate), 2, argv);
 Isolate* isolate = Isolate::GetCurrent();\
 HandleScope scope(isolate);\
 string k = string(__FUNCTION__).substr(4);\
-typeof(callback_map.begin()) it = callback_map.find(k);\
+__callback_iter_type it = callback_map.find(k);\
 if(it == callback_map.end()) return;\
 Local<Value> argv[4];\
 if(rsp != NULL)\
@@ -1101,7 +1101,7 @@ cb->Call(Null(isolate), 4, argv);\
 Isolate* isolate = Isolate::GetCurrent();\
 HandleScope scope(isolate);\
 string k = string(__FUNCTION__).substr(4);\
-typeof(callback_map.begin()) it = callback_map.find(k);\
+__callback_iter_type it = callback_map.find(k);\
 if(it == callback_map.end()) return;\
 Local<Value> argv[3];\
 argv[0] = PkgRspInfo(pRspInfo);\

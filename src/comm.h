@@ -2,7 +2,6 @@
 #define __COMM_H__
 
 #ifdef WIN32
-	#include <windows.h>
 	#include <io.h>
 	#include <process.h>
 #else

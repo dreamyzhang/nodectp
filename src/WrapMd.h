@@ -79,7 +79,9 @@ class WrapMd : public CThostFtdcMdSpiI, public node::ObjectWrap
             callback_map[event].Reset(isolate, cb);
         }
     private:
-        std::map<string, v8::Persistent<v8::Function> > callback_map; //回调js name映射回调处理函数
+        typedef std::map<string, v8::Persistent<v8::Function> > __callback_type;
+        typedef std::map<string, v8::Persistent<v8::Function> >::iterator  __callback_iter_type;
+        __callback_type callback_map; //回调js name映射回调处理函数
         
         static set<string>         m_event;                //可以注册的回调事件
         static v8::Persistent<v8::Function> constructor;           //主动请求函数映射js name
