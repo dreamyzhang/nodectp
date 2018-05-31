@@ -1,3 +1,5 @@
+process.env.PATH += ';D:\\nodectp\\20180109_tradeapi64_windows'
+console.log(process.env.PATH)
 var ctp = require('bindings')('shifctp');
 
 var mduser = ctp.crmd();
